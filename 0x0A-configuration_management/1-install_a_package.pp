@@ -1,5 +1,6 @@
-# install flask -v 2.1.0
-
+# This script uses pip to install flask
 exec { 'flask':
-  command => '/usr/bin/apt-get -y install flask -v 2.1.0',
+  command => '/usr/bin/pip install flask==2.1.0',
+  path    => ['/usr/bin'],
+  unless  => '/usr/bin/pip show flask',
 }
