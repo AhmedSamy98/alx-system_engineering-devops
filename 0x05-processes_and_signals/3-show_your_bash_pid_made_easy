@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# script using pgrep for finding pids!
-pgrep -l "bash"
