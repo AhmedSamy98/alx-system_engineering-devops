@@ -1,16 +1,11 @@
-# This  Script modifies the /etc/ssh/ssh_config
-include stdlib
+#!/usr/bin/env bash
+# Automating my Tasks using Puppet
 
-file_line { 'Turn off passwd auth':
+file { '/etc/ssh/ssh_config':
   ensure  => present,
-  path    => '/etc/ssh/ssh_config',
-  line    => 'PaswordAuthentication no',
-  replace => true,
-}
-
-file_line { 'Declare identity file':
-  ensure  => present,
-  path    => '/etc/ssh/ssh_config',
-  line    => 'IdentityFile ~/.ssh/school',
-  replace => true,
+content => "
+    # SSH client configuration
+    host *
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
 }
