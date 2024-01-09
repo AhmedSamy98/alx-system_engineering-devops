@@ -15,10 +15,10 @@ frontend  ahmedsamy98_frontend
         bind *:80
         mode http
         default_backend ahmedsamy98_backend
-backend besthor_backend
+backend ahmedsamy98_backend
         balance roundrobin
-        server 176572-web-01 18.235.234.167:80 check
-        server 176572-web-02 54.236.43.210:80 check
+        server 417832-web-01 18.235.234.167:80 check
+        server 417832-web-02 54.236.43.210:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
