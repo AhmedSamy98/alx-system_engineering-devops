@@ -1,27 +1,24 @@
 #!/usr/bin/python3
-'''
-Python script that returns information using REST API
-'''
+"""This module request data from
+jsonplaceholder"""
 import requests
-from sys import argv
+import sys
 
-if __name__ == "__main__":
-    if len(argv) > 1:
-        user = argv[1]
-        url = "https://jsonplaceholder.typicode.com/"
-        req = requests.get("{}users/{}".format(url, user))
-        name = req.json().get("name")
-        if name is not None:
-            jreq = requests.get(
-                "{}todos?userId={}".format(
-                    url, user)).json()
-            alltsk = len(jreq)
-            completedtsk = []
-            for t in jreq:
-                if t.get("completed") is True:
-                    completedtsk.append(t)
-            count = len(completedtsk)
-            print("Employee {} is done with tasks({}/{}):"
-                  .format(name, count, alltsk))
-            for title in completedtsk:
-                print("\t {}".format(title.get("title")))
+
+if __name__ == '__main__':
+    end_point = "https://jsonplaceholder.typicode.com/"
+    id = sys.argv[1]
+    response = requests.get('{}users/{}'
+                            .format(end_point, id)).json()
+    name = response["name"]
+    print('Employee {} is done with tasks'.format(name), end="")
+
+    todos = requests.get('{}todos?userId={}'.
+                         format(end_point, id)).json()
+    complete = []
+    for todo in todos:
+        if todo['completed'] is True:
+            complete.append(todo)
+    print('({}/{}):'.format(len(complete), len(todos)))
+    for task in complete:
+        print('\t {}'.format(task['title']))
